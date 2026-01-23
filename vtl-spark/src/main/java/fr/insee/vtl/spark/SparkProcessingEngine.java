@@ -115,12 +115,20 @@ public class SparkProcessingEngine implements ProcessingEngine {
       partitionBy = List.of();
     }
 
-    WindowSpec windowSpec = Window.partitionBy(colNameToCol(partitionBy));
+    Column[] partitionCols =
+        scala.collection.JavaConverters.seqAsJavaList(colNameToCol(partitionBy))
+            .toArray(new Column[0]);
+
+    WindowSpec windowSpec = Window.partitionBy(partitionCols);
 
     if (orderBy == null) {
       orderBy = Map.of();
     }
-    windowSpec = windowSpec.orderBy(buildOrderCol(orderBy));
+
+    Column[] orderCols =
+        scala.collection.JavaConverters.seqAsJavaList(buildOrderCol(orderBy))
+            .toArray(new Column[0]);
+    windowSpec = windowSpec.orderBy(orderCols);
 
     if (window instanceof Analytics.DataPointWindow) {
       windowSpec = windowSpec.rowsBetween(-window.getLower(), window.getUpper());
@@ -313,10 +321,10 @@ public class SparkProcessingEngine implements ProcessingEngine {
     SparkDataset dataset = asSparkDataset(expression);
 
     List<Column> columns = columnNames.stream().map(Column::new).collect(Collectors.toList());
-    Seq<Column> columnSeq = iterableAsScalaIterable(columns).toSeq();
+    Column[] columnArray = columns.toArray(new Column[0]);
 
     // Project in spark.
-    Dataset<Row> result = dataset.getSparkDataset().select(columnSeq);
+    Dataset<Row> result = dataset.getSparkDataset().select(columnArray);
 
     return new SparkDatasetExpression(new SparkDataset(result, getRoleMap(dataset)), expression);
   }

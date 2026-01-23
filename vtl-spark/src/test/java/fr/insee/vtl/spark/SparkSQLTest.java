@@ -69,7 +69,7 @@ public class SparkSQLTest {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

@@ -3,6 +3,7 @@ package fr.insee.vtl.spark.samples;
 import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.Structured;
 import fr.insee.vtl.spark.SparkDataset;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class RegisterMethodTest {
   }
 
   @AfterEach
-  public void tearDown() {
+  public void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

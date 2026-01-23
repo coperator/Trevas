@@ -8,6 +8,7 @@ import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.model.InMemoryDataset;
 import fr.insee.vtl.model.Structured;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import javax.script.ScriptContext;
@@ -37,7 +38,7 @@ public class PivotTest {
   }
 
   @AfterEach
-  public void tearDown() {
+  public void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

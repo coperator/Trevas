@@ -1,7 +1,6 @@
 package fr.insee.vtl.spark;
 
 import static org.apache.spark.sql.types.DataTypes.*;
-import static scala.collection.JavaConverters.mapAsScalaMap;
 
 import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.model.Structured;
@@ -14,7 +13,6 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.*;
-import scala.Predef;
 
 /** The <code>SparkDataset</code> class is a wrapper around a Spark dataframe. */
 public class SparkDataset implements Dataset {
@@ -174,7 +172,7 @@ public class SparkDataset implements Dataset {
       map.put("vtlValuedomain", vd);
       map.put("vtlType", component.getType().getName());
       scala.collection.immutable.Map<String, Object> md =
-          mapAsScalaMap(map).toMap(Predef.$conforms());
+          scala.collection.immutable.Map.from(scala.jdk.javaapi.CollectionConverters.asScala(map));
       schema.add(
           DataTypes.createStructField(
               component.getName(), fromVtlType(component.getType()), true, new Metadata(md)));

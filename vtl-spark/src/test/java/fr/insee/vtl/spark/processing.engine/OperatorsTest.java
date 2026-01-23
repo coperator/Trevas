@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.spark.samples.DatasetSamples;
+import java.io.IOException;
 import java.util.Map;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
@@ -33,7 +34,7 @@ public class OperatorsTest {
   }
 
   @AfterEach
-  public void tearDown() {
+  public void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

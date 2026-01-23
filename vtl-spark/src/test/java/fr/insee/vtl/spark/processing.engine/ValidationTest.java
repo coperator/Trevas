@@ -8,6 +8,7 @@ import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.model.InMemoryDataset;
 import fr.insee.vtl.model.Structured;
 import fr.insee.vtl.spark.SparkDataset;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -179,7 +180,7 @@ public class ValidationTest {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

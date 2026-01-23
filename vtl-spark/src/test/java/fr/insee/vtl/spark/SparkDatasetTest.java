@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.InMemoryDataset;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class SparkDatasetTest {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

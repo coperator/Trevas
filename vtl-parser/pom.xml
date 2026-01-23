@@ -17,7 +17,7 @@
 
     <!--    Warning: not lastest, align with version embedded by Spark-->
     <properties>
-        <antlr4.version>4.9.3</antlr4.version>
+        <antlr4.version>4.13.1</antlr4.version>
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.basedir}/../coverage/target/site/jacoco-aggregate/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>

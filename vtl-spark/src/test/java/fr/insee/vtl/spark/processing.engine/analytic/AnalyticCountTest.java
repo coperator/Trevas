@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.model.InMemoryDataset;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import javax.script.ScriptContext;
@@ -68,7 +69,7 @@ public class AnalyticCountTest {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 

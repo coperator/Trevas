@@ -4,6 +4,7 @@ import fr.insee.vtl.engine.VtlScriptEngine;
 import fr.insee.vtl.model.Dataset;
 import fr.insee.vtl.model.Dataset.Role;
 import fr.insee.vtl.model.InMemoryDataset;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -144,7 +145,7 @@ public abstract class AnalyticTest {
   }
 
   @AfterAll
-  public static void tearDown() {
+  public static void tearDown() throws IOException {
     if (spark != null) spark.close();
   }
 
